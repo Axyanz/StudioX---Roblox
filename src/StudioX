@@ -1,0 +1,437 @@
+--[[
+	
+	StudioX
+	The Libary for Assets
+
+	THIS PLUGIN WAS 100% MADE BY AXYANZ PLEASE MAKE SURE THIS IS NOT STOLEN!
+
+	CreatorName = Axyanz
+	CreatorID = 1093288728
+	CreatorDiscord = Axyanz#8148
+--]]
+
+
+
+-- PLUGIN CORE --
+local changeHistoryService = game:GetService("ChangeHistoryService")
+local toolbar = plugin:CreateToolbar("StudioX")
+local StudioXButton = toolbar:CreateButton("StudioX", "Advanced Assests and tutorials for studio!", "rbxassetid://8940324530")
+local SoundService = game:GetService("SoundService")
+local Opened = false
+
+-- MODULES --
+local ModulesFolder = script.Modules
+local ModuleAssetsFolder = ModulesFolder.Assets
+local EasyScriptsModule = require(ModuleAssetsFolder.ScriptModules.EasyScripts)
+local MediumScriptsModule = require(ModuleAssetsFolder.ScriptModules.MediumScripts)
+local HardScriptsModule = require(ModuleAssetsFolder.ScriptModules.HardScripts)
+local FunctionsModule = require(ModulesFolder.Other.Functions)
+local LightingModule = require(ModuleAssetsFolder.LightingAssets)
+local VehicleSoundsModule = require(ModuleAssetsFolder.SoundsModule.VehicleSounds)
+
+
+-- PLUGIN INTERFACE SETUP --
+local StudioXGuiMain = script.StudioXGui.Background
+StudioXGuiMain.Parent = game.CoreGui
+
+local widgetInfo = DockWidgetPluginGuiInfo.new(
+	Enum.InitialDockState.Float,  -- Widget will be initialized in floating panel
+	true,   -- Widget will be initially enabled
+	false,  -- Don't override the previous enabled state
+	200,    -- Default width of the floating window
+	100,    -- Default height of the floating window
+	150,    -- Minimum width of the floating window (optional)
+	150     -- Minimum height of the floating window (optional)
+)
+
+local WidgetTest = plugin:CreateDockWidgetPluginGui("StudioX", widgetInfo)
+
+local Widget = StudioXGuiMain
+Widget.Parent = WidgetTest
+
+
+StudioXButton.Click:Connect(function()
+	if Opened then
+		WidgetTest.Enabled = false
+		Opened = false
+	else
+		WidgetTest.Enabled = true
+		Opened = true
+		
+	end
+end)
+
+----------------------------------------------------------------------------------
+
+-- INTERFACE FRAMES --
+local HomeFrame = Widget.HomeFrame
+local SettingsFrame = Widget.SettingsFrame
+local ScriptOptionsFrame = Widget.ScriptOptionsFrame
+local EasyScriptsFrame = Widget.EasyScriptsFrame
+local AssestOptionsFrame = Widget.AssestOptionsFrame
+local SupportFrame = Widget.SupportFrame
+local LightingFrame = Widget.LightingFrame
+local OtherFrame = Widget.OthersFrame
+local OtherOptions = Widget.OtherOptions
+local EasyScriptFrame2 = Widget.EasyScriptFrame2
+local SoundsFrame = Widget.SoundsFrame
+local VehicleSoundsFrame = Widget.VehicleSoundsFrame
+
+-- INTERFACE BUTTONS --
+local AssestsButton = Widget.HomeFrame.AssestsButton
+local SupportButton = Widget.HomeFrame.SupportButton
+local SettingsButton = Widget.HomeFrame.SettingsButton
+local HomeButton = Widget.home
+local ScriptsButton = Widget.AssestOptionsFrame.ScriptsButton
+local LightingButton = Widget.AssestOptionsFrame.LightingButton
+local OtherButton = Widget.AssestOptionsFrame.OtherButton
+local EasyScriptsButton = Widget.ScriptOptionsFrame.EasyScriptsButton
+local MediumScriptsButton = Widget.ScriptOptionsFrame.MediumScriptsButton
+local HardScriptsButton = Widget.ScriptOptionsFrame.HardScriptsButton
+local ThemesButton = Widget.SettingsFrame.ThemeButton
+local ModelsButton = Widget.OtherOptions.ModelsButton
+local SoundsButton = Widget.OtherOptions.SoundsButton
+local PrefabButton = Widget.OtherOptions.Prefabs
+local NextArrow1 = Widget.EasyScriptsFrame.NextArrow1
+local NextArrow2 = Widget.EasyScriptFrame2.NextArrow
+local BackArrow1 = Widget.EasyScriptFrame2.BackArrow1
+local VehicleSoundsButton = Widget.SoundsFrame.VehicleSoundsButton
+--
+
+local Camera2D = Widget.EasyScriptsFrame.Camera2D
+local FallDamage = Widget.EasyScriptsFrame.FallDamage
+local Leaderstats = Widget.EasyScriptsFrame.Leaderstats
+local ShiftToSprint = Widget.EasyScriptsFrame.ShiftToSprint
+local CloudySky = Widget.LightingFrame.CloudySky
+local SpaceSky = Widget.LightingFrame.SpaceSky
+local DayCycle = Widget.EasyScriptFrame2.DayCycle
+local Deathpart = Widget.EasyScriptFrame2.Deathpart
+local DoubleJump = Widget.EasyScriptFrame2.DoubleJump
+local TopDownCamera = Widget.EasyScriptFrame2.TopDownCamera
+local Engine1Button = Widget.VehicleSoundsFrame.Engine1Button
+local Engine2Button = Widget.VehicleSoundsFrame.Engine2Button
+local Horn1Button = Widget.VehicleSoundsFrame.Horn1Button
+local Ignition1Button = Widget.VehicleSoundsFrame.Ignition1Button
+local Ignition2Button = Widget.VehicleSoundsFrame.Ignition2Button
+
+--------------------------------------------------------------------------------------------
+
+-- INTERFACE PROGRAMMING --
+Widget.HomeFrame.AssestsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.AssestOptionsOpen()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.HomeFrame.SupportButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.SupportOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.HomeFrame.SettingsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.SettingsOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.home.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.HomeOpen()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+	FunctionsModule.EasyScriptFrame2Close()
+end)
+
+Widget.AssestOptionsFrame.ScriptsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.ScriptOptionsOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+	
+end)
+
+Widget.AssestOptionsFrame.LightingButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.LightingOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.AssestOptionsFrame.OtherButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.OtherOptionsOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+	
+end)
+
+Widget.ScriptOptionsFrame.EasyScriptsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.EasyScriptsOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.ScriptOptionsFrame.MediumScriptsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+Widget.ScriptOptionsFrame.HardScriptsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+
+Widget.EasyScriptsFrame.NextArrow1.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.EasyScriptFrame2Open()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+
+Widget.EasyScriptFrame2.BackArrow1.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.EasyScriptsOpen()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.EasyScriptFrame2Close()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+
+
+Widget.OtherOptions.SoundsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.SoundsFrameOpen()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.EasyScriptFrame2Close()
+	FunctionsModule.VehicleFrameClose()
+end)
+
+
+Widget.SoundsFrame.VehicleSoundsButton.MouseButton1Click:Connect(function()
+	FunctionsModule.ClickSound()
+	FunctionsModule.VehicleFrameOpen()
+	FunctionsModule.SoundsFrameClose()
+	FunctionsModule.EasyScriptsClose()
+	FunctionsModule.AssetOptionsClose()
+	FunctionsModule.HomeClose()
+	FunctionsModule.SettingsClose()
+	FunctionsModule.ScriptOptionsClose()
+	FunctionsModule.ScriptsOptionFrameClose()
+	FunctionsModule.SupportClose()
+	FunctionsModule.LightingClose()
+	FunctionsModule.OtherClose()
+	FunctionsModule.OtherOptionsClose()
+	FunctionsModule.EasyScriptFrame2Close()
+end)
+
+
+--------------------------------------------------------------------------------------------
+
+-- ASSETS INSERTER --
+
+Widget.EasyScriptsFrame.Camera2D.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.Camera()
+end)
+
+Widget.EasyScriptsFrame.FallDamage.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+EasyScriptsModule.FallDamage()
+end)
+
+Widget.EasyScriptsFrame.ShiftToSprint.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.Shift()
+end)
+
+Widget.EasyScriptsFrame.Leaderstats.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+EasyScriptsModule.Leaderstats()
+end)
+
+Widget.LightingFrame.CloudySky.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	LightingModule.CloudySky()
+end)
+
+Widget.LightingFrame.SpaceSky.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	LightingModule.Space()
+end)
+
+Widget.EasyScriptFrame2.DayCycle.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.DayCycle()
+end)
+
+
+Widget.EasyScriptFrame2.Deathpart.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.DeathPart()
+end)
+
+
+Widget.EasyScriptFrame2.DoubleJump.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.DoubleJump()
+end)
+
+
+Widget.EasyScriptFrame2.TopDownCamera.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	EasyScriptsModule.TopDown()
+end)
+
+
+Widget.VehicleSoundsFrame.Engine1Button.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	VehicleSoundsModule.Engine1()
+end)
+
+Widget.VehicleSoundsFrame.Engine2Button.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	VehicleSoundsModule.Engine2()
+end)
+
+
+Widget.VehicleSoundsFrame.Horn1Button.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	VehicleSoundsModule.Horn1()
+end)
+
+
+Widget.VehicleSoundsFrame.Ignition1Button.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	VehicleSoundsModule.Ignition1()
+end)
+
+Widget.VehicleSoundsFrame.Ignition2Button.MouseButton1Click:Connect(function()
+	FunctionsModule.CompleteSound()
+	VehicleSoundsModule.Ignition2()
+end)
+
